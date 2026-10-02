@@ -15,4 +15,7 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
+# Use gunicorn (production WSGI server). app:app = the Flask instance named
+# `app` in app.py. One worker with a generous timeout since GIF combining is
+# CPU/memory heavy and can take a while.
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--timeout", "120", "app:app"]
