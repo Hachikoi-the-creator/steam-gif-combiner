@@ -1,0 +1,408 @@
+:root {
+  --bg: #171a21;
+  --card: rgba(27, 40, 56, 0.78);
+  --card-border: rgba(102, 192, 244, 0.14);
+  --text: #c7d5e0;
+  --muted: #8f98a0;
+  --accent: #66c0f4;
+  --accent-2: #a4d007;
+  --danger: #ff5c7a;
+  --ok: #a4d007;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* background decoration */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 70%);
+  z-index: 0;
+}
+.bg-glow {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  width: 900px;
+  height: 600px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(closest-side, rgba(102, 192, 244, 0.35), transparent),
+    radial-gradient(closest-side, rgba(42, 71, 94, 0.4), transparent) 60% 40%;
+  filter: blur(30px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 20px 40px;
+}
+
+/* hero */
+.hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(102, 192, 244, 0.1);
+  border: 1px solid rgba(102, 192, 244, 0.25);
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 800;
+  margin: 0 0 10px;
+  background: linear-gradient(120deg, #fff 20%, #a7cfe8 55%, #66c0f4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+}
+.hero .sub {
+  color: var(--muted);
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+/* cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+.card h2 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.instructions ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+.instructions li {
+  margin-bottom: 6px;
+}
+.instructions code {
+  background: rgba(102, 192, 244, 0.14);
+  border: 1px solid rgba(102, 192, 244, 0.28);
+  color: #9fd3f5;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.instructions strong {
+  color: var(--text);
+}
+
+/* dropzone */
+.dropzone {
+  display: block;
+  border: 2px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 36px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.1s;
+  background: rgba(255, 255, 255, 0.02);
+}
+.dropzone:hover {
+  border-color: rgba(102, 192, 244, 0.5);
+  background: rgba(102, 192, 244, 0.05);
+}
+.dropzone.drag {
+  border-color: var(--accent);
+  background: rgba(102, 192, 244, 0.12);
+  transform: scale(1.01);
+}
+.drop-icon {
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #417a9b);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(102, 192, 244, 0.4);
+}
+.drop-text {
+  font-size: 15px;
+}
+.drop-text strong {
+  color: var(--text);
+}
+.drop-hint {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* file list */
+.file-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.file-list .num {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(102, 192, 244, 0.18);
+  color: #9fd3f5;
+  font-weight: 700;
+  font-size: 13px;
+}
+.file-list .fname {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-list .fsize {
+  color: var(--muted);
+  font-size: 13px;
+  flex: none;
+}
+.file-list li.bad {
+  border-color: rgba(255, 92, 122, 0.5);
+  background: rgba(255, 92, 122, 0.08);
+}
+.file-list li.bad .num {
+  background: rgba(255, 92, 122, 0.2);
+  color: #ffb3c2;
+}
+
+/* validation message */
+.validation {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.validation.err {
+  background: rgba(255, 92, 122, 0.1);
+  border: 1px solid rgba(255, 92, 122, 0.35);
+  color: #ffc0cd;
+}
+.validation.ok {
+  background: rgba(164, 208, 7, 0.1);
+  border: 1px solid rgba(164, 208, 7, 0.35);
+  color: #c3e86b;
+}
+
+/* actions + buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 22px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition:
+    transform 0.1s,
+    opacity 0.2s,
+    box-shadow 0.2s;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn.primary {
+  background: linear-gradient(135deg, #a1cd44, #6f991b);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(111, 153, 27, 0.35);
+}
+.btn.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+}
+
+/* spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* result */
+.result {
+  text-align: center;
+}
+.result-meta {
+  color: var(--muted);
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+.preview {
+  background: repeating-conic-gradient(#1a1d26 0% 25%, #141720 0% 50%) 50% /
+    20px 20px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 18px;
+  overflow: auto;
+}
+.preview img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* tutorial */
+.tutorial-intro {
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+.tutorial-intro code {
+  background: rgba(102, 192, 244, 0.14);
+  border: 1px solid rgba(102, 192, 244, 0.28);
+  color: #9fd3f5;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 26px;
+  counter-reset: step;
+}
+.step {
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(23, 33, 46, 0.5);
+}
+.step-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+}
+.step-head p {
+  margin: 2px 0 0;
+  color: var(--text);
+}
+.step-head strong {
+  color: #ffffff;
+}
+.step-num {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #417a9b);
+  color: #0b1016;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 6px 18px rgba(102, 192, 244, 0.35);
+}
+.step-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-top: 1px solid var(--card-border);
+}

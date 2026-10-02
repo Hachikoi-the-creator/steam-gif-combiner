@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steam Animated Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <main class="shell">
+      <header class="hero">
+        <div class="badge">Steam Animated Showcase</div>
+        <h1>Turn your GIFs into a Steam profile showcase</h1>
+        <p class="sub">
+          Drop your GIFs below and get a single wide, animated GIF with all of
+          them playing side by side &mdash; sized and auto-compressed under
+          5&nbsp;MB to fit a Steam <strong>Artwork Showcase</strong> on your
+          profile.
+        </p>
+      </header>
+
+      <section class="card instructions">
+        <h2>How to name your files</h2>
+        <ul>
+          <li>Every file must be a <strong>.gif</strong>.</li>
+          <li>
+            Name them with numbers only, in order:
+            <code>1.gif</code>, <code>2.gif</code>, <code>3.gif</code>, …,
+            <code>n.gif</code>.
+          </li>
+          <li>
+            Numbers must start at <strong>1</strong> and be consecutive — no
+            gaps, no duplicates.
+          </li>
+          <li>
+            The order you number them is the left-to-right order in the result.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <form id="form">
+          <label id="drop" class="dropzone" for="fileInput">
+            <input
+              id="fileInput"
+              type="file"
+              name="gifs"
+              accept="image/gif,.gif"
+              multiple
+              hidden
+            />
+            <div class="drop-inner">
+              <div class="drop-icon">⬆</div>
+              <div class="drop-text">
+                <strong>Click to choose</strong> or drag &amp; drop your GIFs
+              </div>
+              <div class="drop-hint">1.gif, 2.gif, 3.gif …</div>
+            </div>
+          </label>
+
+          <ul id="fileList" class="file-list"></ul>
+          <div id="validation" class="validation" hidden></div>
+
+          <div class="actions">
+            <button type="button" id="clearBtn" class="btn ghost" hidden>
+              Clear
+            </button>
+            <button type="submit" id="submitBtn" class="btn primary" disabled>
+              <span class="btn-label">Combine GIFs</span>
+              <span class="spinner" hidden></span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section id="result" class="card result" hidden>
+        <h2>Done!</h2>
+        <p id="resultMeta" class="result-meta"></p>
+        <div class="preview">
+          <img id="resultImg" alt="Combined GIF preview" />
+        </div>
+        <a id="downloadLink" class="btn primary" download="combined.gif">
+          Download combined.gif
+        </a>
+      </section>
+
+      <section class="card tutorial">
+        <h2>How to add it to your Steam profile</h2>
+        <p class="tutorial-intro">
+          Once you've downloaded your <code>combined.gif</code>, follow these
+          steps to set it as a Featured Artwork Showcase.
+        </p>
+
+        <ol class="steps">
+          <li class="step">
+            <div class="step-head">
+              <span class="step-num">1</span>
+              <p>
+                Go to your Steam profile in any web browser (Chrome, Firefox,
+                Brave), then click on <strong>Artwork</strong>.
+              </p>
+            </div>
+            <img
+              class="step-img"
+              src="{{ url_for('imgs', filename='tuto 1.png') }}"
+              alt="Step 1: open your Steam profile and click Artwork"
+              loading="lazy"
+            />
+          </li>
+
+          <li class="step">
+            <div class="step-head">
+              <span class="step-num">2</span>
+              <p>Select <strong>Upload Artwork</strong>.</p>
+            </div>
+            <img
+              class="step-img"
+              src="{{ url_for('imgs', filename='tuto 2.png') }}"
+              alt="Step 2: select Upload Artwork"
+              loading="lazy"
+            />
+          </li>
+
+          <li class="step">
+            <div class="step-head">
+              <span class="step-num">3</span>
+              <p>
+                Give it a name (it will appear on your profile), select the
+                downloaded GIF, and confirm that you own the GIF.
+              </p>
+            </div>
+            <img
+              class="step-img"
+              src="{{ url_for('imgs', filename='tuto 3.png') }}"
+              alt="Step 3: name the artwork, pick the GIF, confirm ownership"
+              loading="lazy"
+            />
+          </li>
+
+          <li class="step">
+            <div class="step-head">
+              <span class="step-num">4</span>
+              <p>
+                Go back to your profile and select
+                <strong>Edit Profile</strong>.
+              </p>
+            </div>
+            <img
+              class="step-img"
+              src="{{ url_for('imgs', filename='tuto 4.png') }}"
+              alt="Step 4: go back to your profile and select Edit Profile"
+              loading="lazy"
+            />
+          </li>
+
+          <li class="step">
+            <div class="step-head">
+              <span class="step-num">5</span>
+              <p>
+                Open <strong>Showcase Manager</strong>. With the arrows on the
+                left, pick a section you don't mind replacing, and in the
+                highlighted dropdown select
+                <strong>Featured Artwork Showcase</strong>. Now just select the
+                GIF you uploaded, save, and enjoy!
+              </p>
+            </div>
+            <img
+              class="step-img"
+              src="{{ url_for('imgs', filename='tuto 5.png') }}"
+              alt="Step 5: Showcase Manager, choose Featured Artwork Showcase, select your GIF and save"
+              loading="lazy"
+            />
+          </li>
+        </ol>
+      </section>
+
+      <footer class="foot">All processing runs locally on your machine.</footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
